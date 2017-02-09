@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int USER_INPUT(void);
 int factorial(int);
@@ -16,18 +17,28 @@ int main(){
             case '1':
             printf("Enter a desired number n for n! (0 - 12): ");
             scanf("%d", &fac_n);
-            if (fac_n <0 || fac_n > 12){
-              printf("Value(%d) out of range (0 - 12)", fac_n);
-              return 1;
-            }else{
+                while(fac_n<0 || fac_n>12)
+                {
+                    printf("Value(%d) out of range (0 - 12) Try again.\n", fac_n);
+                    printf("Enter a desired number n for n! (0 - 12): ");
+                    scanf("%d", &fac_n);
+                }
+
               printf("%d! = %d", fac_n,factorial(fac_n) );
-            }
+
             break;
 
             case '2':
             printf("Enter a desired number m for F_m (0 - 46): ");
             scanf("%d",&fib_m );
-            fibonacci(fib_m);
+                while(fib_m<0 || fib_m>46){
+                  printf("Value(%d) out of range (0 - 46) Try again.\n", fib_m);
+                  printf("Enter a desired number m for F_m (0 - 46): ");
+                  scanf("%d",&fib_m );
+                }
+
+            printf("F_%d = %d",fib_m,fibonacci(fib_m));
+
             break;
 
             case '3':
@@ -36,6 +47,12 @@ int main(){
             hanoi(han_l);
             break;
 
+
+            case '4':
+                    printf("Good bye!\n");
+                    exit(1);
+            break;
+            
             default :
             printf("Invalid choice. Try again.\n");
             printf("");
@@ -65,7 +82,14 @@ int factorial(int n){
 }
 
 int fibonacci(int m){
-
+  if(m==0){
+      return 0;
+  }
+  else if(m==1){
+      return 1;
+  }else {
+      return (fibonacci(m-1)+fibonacci(m-2));
+  }
 }
 
 void hanoi(int h){
