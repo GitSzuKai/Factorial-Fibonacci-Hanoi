@@ -4,7 +4,7 @@
 int USER_INPUT(void);
 int factorial(int);
 int fibonacci(int);
-void hanoi(int);
+void hanoi(int,char,char,char);
 
 int main(){
 
@@ -44,7 +44,12 @@ int main(){
             case '3':
             printf("Enter the number of discs for the Tower of Hanoi (1 - 1000): ");
             scanf("%d", &han_l);
-            hanoi(han_l);
+              while (han_l<1 || han_l>1000){
+                printf("Value(%d) out of range (1 - 1000) Try again.\n", han_l);
+                printf("Enter a desired number OF discs for the Tower of Hanoi (0 - 1000): ");
+                scanf("%d", &han_l);
+              }
+            hanoi(han_l,'A','B','C');
             break;
 
 
@@ -52,7 +57,7 @@ int main(){
                     printf("Good bye!\n");
                     exit(1);
             break;
-            
+
             default :
             printf("Invalid choice. Try again.\n");
             printf("");
@@ -92,6 +97,13 @@ int fibonacci(int m){
   }
 }
 
-void hanoi(int h){
+void hanoi(int h, char peg_a, char peg_b, char peg_c){
+      if (1==h){
+        printf("Move the top disk: %c -> %c\n", peg_a, peg_c);
+        return; 
+      }
+        hanoi(h-1,peg_a,peg_c,peg_b);
+        printf("Move the top disk: %c -> %c\n", peg_a, peg_c) ;
+        hanoi(h-1,peg_b,peg_a,peg_c);
 
 }
